@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Dashboard from './pages/Dashboard'
 import Signup from './pages/Signup'
 import Header from './components/Header'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
 const App = () => {
   return (
-    <Router>
+   <>
+      
+      <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Navigate to="/auth" replace />} />
@@ -15,6 +19,8 @@ const App = () => {
         <Route path="*" element={<Navigate to="/auth" replace />} />
       </Routes>
     </Router>
+    <ToastContainer/>
+   </>
   )
 }
 
