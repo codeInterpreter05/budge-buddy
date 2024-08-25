@@ -1,9 +1,10 @@
 import React from 'react'
+import Register from '../components/Register'
 
 const Signup = () => {
   return (
-    <div>
-      
+    <div className='flex justify-center items-center h-[85vh]'>
+      <Register/>
     </div>
   )
 }
