@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import Input from '../Input';
 import Button from '../Button';
-import { auth,  db } from '../../firebase';
+import { auth,  db, provider } from '../../firebase';
 import {setDoc, doc, getDoc} from 'firebase/firestore'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -121,6 +121,29 @@ const Register = () => {
       });
   }
 
+  function googleAuth() {
+    setLoading(true);
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+    createDoc(user)
+    setLoading(false);
+    toast.success("User authenticated");  
+    navigate("/dashboard");
+
+   
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    setLoading(false)
+    toast.error("There was an error")
+  });
+  }
+
   return (
     <div className={`w-[85%] sm:w-[70%] max-w-[400px] ${loginForm ? "h-[90%]" : "h-[100%]"}  mt-6 sm:px-4 pt-8 pb-4 rounded-lg shadow-xl flex flex-col justify-start items-center`}>
       {loginForm ? (
@@ -146,7 +169,7 @@ const Register = () => {
               disabled={loading}
               text={loading ? "Verifying..." : "Google login"}
               blue={true}
-              onClick={() => toast.info("Google signup coming soon!")}
+              onClick={() => googleAuth()}
             />
           </form>
           <p className="mt-4">
@@ -181,7 +204,7 @@ const Register = () => {
               disabled={loading}
               text={loading ? "Creating user..." : "Google signup"}
               blue={true}
-              onClick={() => toast.info("Google signup coming soon!")}
+              onClick={() => googleAuth()}
             />
           </form>
           <p className="mt-4">
