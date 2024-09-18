@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
+import { SheetProvider } from "@/providers/sheet-provider";
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +24,8 @@ export default function RootLayout({
             className={`antialiased custom-scrollbar`}
           >
             <QueryProvider>
+              <SheetProvider />
+              <Toaster />
               {children}
             </QueryProvider>
           </body>

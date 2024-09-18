@@ -30,8 +30,8 @@ export default function Page() {
         <h2 className="ml-8 text-center text-3xl text-gray-50">
           Manage your finances with
         </h2>
-        <div className="flex justify-center items-center">
-          <Image src="/logo.png" height={100} width={100} alt="logo" />
+        <div className="flex justify-center items-center gap-3">
+          <Image src="/logo.png" height={75} width={75} alt="logo" />
           <h1 className="text-4xl font-bold text-white">BudgeBuddy</h1>
         </div>
         <h2 className="px-10 text-center text-xl text-gray-200">
