@@ -15,6 +15,13 @@
       "when": 1726574603820,
       "tag": "0001_zippy_anthem",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727460252193,
+      "tag": "0002_woozy_miracleman",
+      "breakpoints": true
     }
   ]
 }
