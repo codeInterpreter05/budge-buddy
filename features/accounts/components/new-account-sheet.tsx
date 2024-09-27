@@ -23,7 +23,6 @@ const formSchema = insertAccountSchema.pick({
     const mutation = useCreateAccount();
 
     const onSubmit = (values: FormValues) => {
-        console.log("onSubmit called with values:", values);
         mutation.mutate(values, {
             onSuccess: () => {
                 onClose();

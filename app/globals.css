@@ -93,7 +93,7 @@ body {
 
 /* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 0px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
