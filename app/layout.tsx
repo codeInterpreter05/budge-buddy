@@ -23,10 +23,13 @@ export default function RootLayout({
           <body
             className={`antialiased custom-scrollbar`}
           >
+            
             <QueryProvider>
-              <SheetProvider />
               <Toaster />
+              <SheetProvider />
+              
               {children}
+              
             </QueryProvider>
           </body>
       </html>
