@@ -6,36 +6,36 @@ import {
     SheetTitle
  } from "@/components/ui/sheet"
 
-import { AccountForm } from "./account-form";
-import { insertAccountSchema } from "@/db/schema";
+import { TransactionForm } from "./transaction-form";
+import { insertTransactionSchema } from "@/db/schema";
 import { z } from "zod";
-import { useOpenAccount } from "../hooks/use-open-account";
-import { useGetAccount } from "../api/use-get-transaction";
-import { useEditAccount } from "../api/use-edit-account";
-import { useDeleteAccount } from "../api/use-delete-transaction";
-import { Loader2 } from "lucide-react";
+import { useOpenTransaction } from "../hooks/use-open-transaction";
+import { useGetTransaction } from "../api/use-get-transaction";
+import { useEditTransaction } from "../api/use-edit-transcation";
+import { useDeleteTransaction } from "../api/use-delete-transaction";
+import { Loader2, TrendingUp } from "lucide-react";
 import { useConfirm } from "@/hooks/use-confirm";
 
-const formSchema = insertAccountSchema.pick({
-    name: true,
- })
+const formSchema = insertTransactionSchema.omit({
+    id: true
+})
 
  type FormValues = z.input<typeof formSchema>;
 
- export const EditAccountSheet = () => {
-    const { isOpen, onClose, id } = useOpenAccount();
+ export const EditTransactionSheet = () => {
+    const { isOpen, onClose, id } = useOpenTransaction();
 
     const [ConfirmDialog, confirm] = useConfirm(
         "Are you sure?",
-        "You are about to delete this account"
+        "You are about to delete this Transaction"
     )
 
-    const accountQuery = useGetAccount(id);
-    const editMutation = useEditAccount(id);
-    const deleteMutation = useDeleteAccount(id);
+    const TransactionQuery = useGetTransaction(id);
+    const editMutation = useEditTransaction(id);
+    const deleteMutation = useDeleteTransaction(id);
 
     const isPending = editMutation.isPending || deleteMutation.isPending;
-    const isLoading = accountQuery.isLoading;
+    const isLoading = TransactionQuery.isLoading;
 
 
     const onSubmit = (values: FormValues) => {
@@ -58,8 +58,8 @@ const formSchema = insertAccountSchema.pick({
         }
     }
 
-    const defaultValues = accountQuery.data ? {
-        name: accountQuery.data.name,
+    const defaultValues = TransactionQuery.data ? {
+        name: TransactionQuery.data.id,
     } : {
         name: "",
     }
@@ -70,8 +70,8 @@ const formSchema = insertAccountSchema.pick({
           <Sheet open={isOpen} onOpenChange={onClose}>
             <SheetContent className="space-y-4 bg-white">
                 <SheetHeader>
-                    <SheetTitle>Edit Account</SheetTitle>
-                    <SheetDescription>Edit an existing account</SheetDescription>
+                    <SheetTitle>Edit Transaction</SheetTitle>
+                    <SheetDescription>Edit an existing Transaction</SheetDescription>
                 </SheetHeader>
                 {
                     isLoading ? (
@@ -79,11 +79,10 @@ const formSchema = insertAccountSchema.pick({
                             <Loader2 className="animate-spin size-4 text-muted-foreground" />
                         </div>
                     ) : (
-                        <AccountForm 
+                        <TransactionForm 
                         id={id}
                         onSubmit={onSubmit} 
                         disabled={isPending}
-                        defaultValues={defaultValues}
                         onDelete={onDelete}
                         />
                     )
