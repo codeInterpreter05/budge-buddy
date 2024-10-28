@@ -61,13 +61,20 @@ const formSchema = insertTransactionSchema.omit({
         categoryQuery.isLoading ||
         accountQuery.isLoading;
 
-    const onSubmit = (values: FormValues) => {
-        createMutation.mutate(values, {
-            onSuccess: () => {
-                onClose();
-            }
-        });
-    }
+        const onSubmit = (values: FormValues) => {
+            const intAmount = values.amount;
+            const updatedValues = {
+                ...values,
+                amount: intAmount,
+            };
+        
+            createMutation.mutate(updatedValues, {
+                onSuccess: () => {
+                    onClose();
+                },
+            });
+        };
+        
 
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>

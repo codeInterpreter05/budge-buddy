@@ -15,24 +15,28 @@ import {
     FormLabel,
     FormMessage
  } from "@/components/ui/form"
+import { DatePicker } from "@/components/date-picker";
+import { Textarea } from "@/components/ui/textarea";
+import { AmountInput } from "@/components/amount-input";
+import { convertAmountFromMilliUnits, convertAmountToMilliUnits } from "@/lib/utils";
 
- const formSchema = z.object({
+const formSchema = z.object({
    date: z.coerce.date(),
    accountId: z.string(),
    categoryId: z.string().nullable().optional(),
    payee: z.string(),
    amount: z.string(),
    notes: z.string().optional(),    
- })
+});
 
- const ApiFormSchema = insertTransactionSchema.omit({
+const ApiFormSchema = insertTransactionSchema.omit({
     id: true,
- })
+});
 
- type FormValues = z.input<typeof formSchema>;
- type ApiFormValues = z.input<typeof ApiFormSchema>;
+type FormValues = z.input<typeof formSchema>;
+type ApiFormValues = z.input<typeof ApiFormSchema>;
 
- type Props = {
+type Props = {
     id?: string,
     defaultValues?: FormValues,
     onSubmit: (values: FormValues) => void,
@@ -42,9 +46,9 @@ import {
     categoryOptions: { label: string; value: string; }[];
     onCreateAccount: (name: string) => void;
     onCreateCategory: (name: string) => void; 
- }
+};
 
- export const TransactionForm = ({
+export const TransactionForm = ({
     id,
     defaultValues,
     onSubmit,
@@ -54,29 +58,49 @@ import {
     categoryOptions,
     onCreateAccount,
     onCreateCategory,
- }: Props) => {
+}: Props) => {
 
     const form = useForm<FormValues>({
-        resolver: zodResolver(formSchema),
         defaultValues,
-    })
+    });
 
-    const handleSubmit = (values: FormValues) => {
-         console.log({values})
-        onSubmit(values)
-    }
+    const handleSubmit = (values: FormValues) => { 
+        const amount = parseFloat(values.amount);
+        const amountInMilliUnits = convertAmountToMilliUnits(amount)
+        
+        onSubmit({
+            ...values,
+            amount: amountInMilliUnits.toString(),
+        });
+    };
 
     const handleDelete = () => {
        onDelete?.();
-    }
+    };
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)}
-            className="space-y-4 pt-4"
+            <form onSubmit={form.handleSubmit(handleSubmit, (errors) => {
+                console.log("Form validation errors:", errors); 
+            })}
+            className="space-y-4 pt-4 custom-scrollbar"
             >  
+                <FormField
+                 name="date"
+                 control={form.control}
+                 render={({ field }) => (
+                    <FormItem>
+                        <FormControl>
+                            <DatePicker
+                                value={field.value}
+                                onChange={field.onChange}
+                                disabled={disabled}
+                            />
+                        </FormControl>
+                    </FormItem>
+                 )}
+                />
 
-               
                 <FormField
                  name="accountId"
                  control={form.control}
@@ -97,8 +121,9 @@ import {
                         </FormControl>
                     </FormItem>
                  )}
-                 />
-                 <FormField
+                />
+
+                <FormField
                  name="categoryId"
                  control={form.control}
                  render={({ field }) => (
@@ -118,22 +143,84 @@ import {
                         </FormControl>
                     </FormItem>
                  )}
-                 />
-                 <Button className="w-full" disabled={disabled}>
-                    {id ? "Save changes": "Create account"}
-                 </Button>
-                 {!!id && <Button 
-                    type="button"
-                    disabled={disabled}
-                    onClick={handleDelete}
-                    className="w-full flex justify-center gap-2"
-                    size={"icon"}
-                    variant={"outline"}
-                 >
-                    <TrashIcon className="size-4" />
-                    <p>Delete account</p>
-                 </Button>}
+                />
+
+                <FormField
+                 name="payee"
+                 control={form.control}
+                 render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>
+                            Payee
+                        </FormLabel>
+                        <FormControl>
+                            <Input 
+                              disabled={disabled}
+                              placeholder="Add a payee"
+                              {...field}
+                            />
+                        </FormControl>
+                    </FormItem>
+                 )}
+                />
+                
+                <FormField
+                 name="amount"
+                 control={form.control}
+                 render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>
+                            Amount
+                        </FormLabel>
+                        <FormControl>
+                            <AmountInput
+                                {...field}
+                                disabled={disabled}
+                                placeholder="0.00"
+                            />
+                        </FormControl>
+                    </FormItem>
+                 )}
+                />
+
+                <FormField
+                 name="notes"
+                 control={form.control}
+                 render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>
+                            Notes
+                        </FormLabel>
+                        <FormControl>
+                            <Textarea
+                              {...field}
+                              value={field.value ?? ""}
+                              disabled={disabled}
+                              placeholder="Add a note"
+                            />
+                        </FormControl>
+                    </FormItem>
+                 )}
+                />
+
+                <Button className="w-full" disabled={disabled} >
+                    {id ? "Save changes": "Create Transaction"}
+                </Button>
+
+                {!!id && (
+                    <Button 
+                        type="button"
+                        disabled={disabled}
+                        onClick={handleDelete}
+                        className="w-full flex justify-center gap-2"
+                        size={"icon"}
+                        variant={"outline"}
+                    >
+                        <TrashIcon className="size-4" />
+                        <p>Delete Transaction</p>
+                    </Button>
+                )}
             </form>
         </Form>
-    )
- }
+    );
+};
