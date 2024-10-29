@@ -19,6 +19,7 @@ import { DatePicker } from "@/components/date-picker";
 import { Textarea } from "@/components/ui/textarea";
 import { AmountInput } from "@/components/amount-input";
 import { convertAmountFromMilliUnits, convertAmountToMilliUnits } from "@/lib/utils";
+import { toast } from "sonner";
 
 const formSchema = z.object({
    date: z.coerce.date(),
@@ -64,9 +65,28 @@ export const TransactionForm = ({
         defaultValues,
     });
 
-    const handleSubmit = (values: FormValues) => { 
-        const amount = parseFloat(values.amount);
-        const amountInMilliUnits = convertAmountToMilliUnits(amount)
+    const handleSubmit = (values: FormValues) => {
+        const { date, accountId, payee, amount } = values;
+
+        if (!date) {
+            toast.error("Date is required");
+            return;
+        }
+        if (!accountId) {
+            toast.error("Account is required");
+            return;
+        }
+        if (!payee) {
+            toast.error("Payee is required");
+            return;
+        }
+        if (!amount) {
+            toast.error("Amount is required");
+            return;
+        }
+
+        const parsedAmount = parseFloat(amount);
+        const amountInMilliUnits = convertAmountToMilliUnits(parsedAmount);
         
         onSubmit({
             ...values,

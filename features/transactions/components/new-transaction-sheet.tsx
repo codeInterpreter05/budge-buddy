@@ -78,7 +78,7 @@ const formSchema = insertTransactionSchema.omit({
 
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
-            <SheetContent className="space-y-4 bg-white">
+            <SheetContent className="space-y-4 bg-white custom-scrollbar">
                 <SheetHeader>
                     <SheetTitle>New Transaction</SheetTitle>
                     <SheetDescription>Create a new transaction</SheetDescription>
