@@ -1,7 +1,7 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import { formatDateRange } from "@/lib/utils"
+import { convertAmountToMilliUnits, formatDateRange } from "@/lib/utils"
 import { useGetSummary } from "@/features/summary/api/use-get-summary"
 import { FaPiggyBank } from "react-icons/fa"
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6"
@@ -30,7 +30,7 @@ export const DataGrid = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-2 mb-8">
             <DataCard 
                 title="Balance"
-                value={data?.remainingAmount}
+                value={convertAmountToMilliUnits(data?.remainingAmount)}
                 percentageChange={data?.remainingChange}
                 icon={FaPiggyBank}
                 varaint="default"
@@ -38,7 +38,7 @@ export const DataGrid = () => {
             />
             <DataCard 
                 title="Income"
-                value={data?.incomeAmount}
+                value={convertAmountToMilliUnits(data?.incomeAmount)}
                 percentageChange={data?.incomeChange}
                 icon={FaArrowTrendUp}
                 varaint="default"
