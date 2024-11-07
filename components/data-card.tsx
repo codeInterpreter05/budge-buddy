@@ -89,7 +89,9 @@ export const DataCard = ({
                             decimalPlaces={2}
                             formattingFn={formatCurrency}
                             className={cn(title === "Balance" && value >= 0 && "text-emerald-500", 
-                                title === "Balance" && value < 0 && "text-rose-500"
+                                title === "Balance" && value < 0 && "text-rose-500",
+                                title === "Income" && "text-emerald-500",
+                                title === "Expenses" && "text-rose-500",
                             )}
                         />
                 </h1>
