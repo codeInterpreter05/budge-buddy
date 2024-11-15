@@ -11,24 +11,30 @@ import {
 } from "@/components/ui/sheet"
 import { useState } from "react"
 import { Button } from "./ui/button"
-import { Menu } from "lucide-react"
+import { Menu, Home, FileText, CreditCard, Tag } from "lucide-react"
+import { HeaderLogo } from "./header-logo"
+import Image from "next/image"
 
 const routes = [
     {
         href: "/",
-        label: "Overview"
-    }, 
+        label: "Overview",
+        icon: <Home className="h-5 w-5" />
+    },
     {
         href: "/transactions",
-        label: "Transactions"
-    }, 
+        label: "Transactions",
+        icon: <FileText className="h-5 w-5" />
+    },
     {
         href: "/accounts",
-        label: "Accounts"
+        label: "Accounts",
+        icon: <CreditCard className="h-5 w-5" />
     },
     {
         href: "/categories",
-        label: "Categories"
+        label: "Categories",
+        icon: <Tag className="h-5 w-5" />
     },
 ]
 
@@ -44,33 +50,42 @@ export const Navigation = () => {
     }
 
     if (isMobile) {
-        return <>
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
-                    <div
-                        className="font-normal bg-white/10 hover:bg-white/20 hover:text-white border-none focus-visible:ring-offset-0 focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition p-2 rounded-md cursor-pointer"
-                    >
-                        <Menu className="h-4 w-4" />
-                    </div>
-                </SheetTrigger>
-                <SheetContent side="left" className="px-2 bg-white">
-                    <nav className="flex flex-col gap-y-2 pt-6">
-                        {
-                            routes.map(({ href, label }, index) => (
-                            <Button
-                                variant={href === pathname ? "secondary" : "ghost"}
-                                key={href}
-                                onClick={() => { onClick(href) }}
-                                className="w-full justify-start"
-                            >
-                                {label}
-                            </Button>
-                            ))
-                        }
-                    </nav>
-                </SheetContent> 
-            </Sheet>
-        </>
+        return (
+            <>
+                <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    <SheetTrigger asChild>
+                        <div
+                            className="font-normal bg-white/10 hover:bg-white/20 hover:text-white border-none focus-visible:ring-offset-0 focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition p-2 rounded-md cursor-pointer"
+                        >
+                            <Menu className="h-5 w-5" />
+                        </div>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="px-2 bg-white min-w-[220px] max-w-[260px]">
+                        <Image
+                            src="/logo-2.png"
+                            height={30}
+                            width={30}
+                            alt="logo"
+                        />
+                        <nav className="flex flex-col gap-y-2 pt-6">
+                            {
+                                routes.map(({ href, label, icon }, index) => (
+                                    <Button
+                                        variant={href === pathname ? "secondary" : "ghost"}
+                                        key={href}
+                                        onClick={() => { onClick(href) }}
+                                        className="w-full justify-start"
+                                    >
+                                        {icon}
+                                        <span className="ml-2 text-md">{label}</span>
+                                    </Button>
+                                ))
+                            }
+                        </nav>
+                    </SheetContent>
+                </Sheet>
+            </>
+        );
     }
 
     return (
@@ -86,5 +101,6 @@ export const Navigation = () => {
                 ))
             }
         </div>
-    )
+    );
 }
+
