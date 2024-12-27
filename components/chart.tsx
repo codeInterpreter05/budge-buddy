@@ -42,7 +42,7 @@ export const Chart = ({
     return (
         <Card className="border-none drop-shadow-sm">
             <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center justify-between">
-                <CardTitle className="text-xl line-clamp-1">
+                <CardTitle className="text-xl ">
                     Transactions
                 </CardTitle>
                 <Select 
@@ -56,20 +56,20 @@ export const Chart = ({
                         <SelectItem value="area">
                             <div className="flex items-center">
                                 <AreaChart className="size-4 mr-1 shrink-0" />
-                                <p className="line-clamp-1">Area Chart</p>
+                                <p className="">Area Chart</p>
                             </div>
                         </SelectItem>
                         <SelectItem value="bar">
                             <div className="flex items-center">
                                 <BarChart className="size-4 mr-1 shrink-0" />
-                                <p className="line-clamp-1">Bar Chart</p>
+                                <p className="">Bar Chart</p>
                             </div>
 
                         </SelectItem>
                         <SelectItem value="line">
                             <div className="flex items-center">
                                 <LineChart className="size-4 mr-1 shrink-0" />
-                                <p className="line-clamp-1">Line Chart</p>
+                                <p className="">Line Chart</p>
                             </div>
                         </SelectItem>
                     </SelectContent>

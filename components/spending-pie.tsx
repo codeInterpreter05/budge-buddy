@@ -44,7 +44,7 @@ export const SpendingPie = ({
     return (
         <Card className="border-none drop-shadow-sm">
             <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center justify-between">
-                <CardTitle className="text-xl line-clamp-1">
+                <CardTitle className="text-xl ">
                     Categories
                 </CardTitle>
                 <Select 
@@ -58,20 +58,20 @@ export const SpendingPie = ({
                         <SelectItem value="pie">
                             <div className="flex items-center">
                                 <PieChart className="size-4 mr-1 shrink-0" />
-                                <p className="line-clamp-1">Pie Chart</p>
+                                <p className="">Pie Chart</p>
                             </div>
                         </SelectItem>
                         <SelectItem value="radar">
                             <div className="flex items-center">
                                 <Radar className="size-4 mr-1 shrink-0" />
-                                <p className="line-clamp-1">Radar Chart</p>
+                                <p className="">Radar Chart</p>
                             </div>
 
                         </SelectItem>
                         <SelectItem value="radial">
                             <div className="flex items-center">
                                 <Target className="size-4 mr-1 shrink-0" />
-                                <p className="line-clamp-1">Radial Chart</p>
+                                <p className="">Radial Chart</p>
                             </div>
                         </SelectItem>
                     </SelectContent>
