@@ -12,7 +12,6 @@ import {
 import { useState } from "react"
 import { Button } from "./ui/button"
 import { Menu, Home, FileText, CreditCard, Tag } from "lucide-react"
-import { HeaderLogo } from "./header-logo"
 import Image from "next/image"
 
 const routes = [

@@ -2,7 +2,6 @@ import { AreaChart, BarChart3 as BarChart, FileSearch, LineChart, Loader2 } from
 import { 
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle
 } from "./ui/card"

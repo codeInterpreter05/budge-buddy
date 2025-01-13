@@ -1,9 +1,5 @@
-import z from "zod"
-import { zValidator } from "@hono/zod-validator"
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
-
-import { HTTPException } from "hono/http-exception"
 
 import accounts from "./accounts"
 import categories from "./categories"
@@ -13,7 +9,6 @@ import summary from "./summary"
 export const runtime = 'edge'
 
 const app = new Hono().basePath('/api')
-
 
 const routes = app
     .route("/accounts", accounts)

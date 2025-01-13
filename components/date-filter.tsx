@@ -5,7 +5,6 @@ import { format, subDays } from "date-fns"
 import { DateRange } from "react-day-picker"
 import { ChevronDown } from "lucide-react"
 
-import { useGetSummary } from "@/features/summary/api/use-get-summary"
 import qs from "query-string"
 import {
     usePathname,
@@ -13,15 +12,6 @@ import {
     useSearchParams
 } from "next/navigation"
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "./ui/select"
-
-import { cn, formatDateRange } from "@/lib/utils"
 import { Button } from "./ui/button"
 import { Calendar } from "./ui/calendar"
 
@@ -31,6 +21,7 @@ import {
     PopoverTrigger,
     PopoverClose
 } from "./ui/popover"
+import { formatDateRange } from "@/lib/utils"
 
 export const DateFilter = () => {
     const router = useRouter();

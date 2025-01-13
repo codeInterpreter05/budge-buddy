@@ -2,7 +2,6 @@ import { PieChart, Radar, Target, FileSearch, Loader2 } from "lucide-react";
 import { 
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle
 } from "./ui/card"
@@ -14,10 +13,6 @@ import {
     SelectTrigger,
     SelectItem
 } from "./ui/select"
-
-import { AreaVariant } from "./area-variant";
-import { BarVariant } from "./bar-variant";
-import { LineVariant } from "./line-variant";
 
 import { useState } from "react";
 import { PieVariant } from "./pie-variant";

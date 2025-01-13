@@ -3,7 +3,6 @@ import {
     RadialBar,
     RadialBarChart,
     ResponsiveContainer,
-    Tooltip
 } from "recharts"
 
 import { convertAmountToMilliUnits, formatCurrency } from "@/lib/utils"
