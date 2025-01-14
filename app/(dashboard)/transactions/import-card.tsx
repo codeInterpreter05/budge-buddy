@@ -27,7 +27,7 @@ interface SelectedColumnsState {
 type Props = {
     data: string[][];
     onCancel: () => void;
-    onSubmit: (data: any) => void;    
+    onSubmit: (data: unknown) => void;    
 }
 
 export const ImportCard = ({
