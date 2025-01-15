@@ -16,7 +16,7 @@ export const useConfirm = (
 ): [() => JSX.Element, () => Promise<boolean>] => {
     const [promise, setPromise] = useState<{
         resolve: (value: boolean) => void;
-        reject: (reason?: any) => void;
+        reject: (reason?: unknown) => void;
     } | null>(null); // To store resolve and reject functions
 
     const confirm = () => {

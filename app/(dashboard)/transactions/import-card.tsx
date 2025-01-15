@@ -88,7 +88,7 @@ export const ImportCard = ({
         };
 
         const arrayOfData = mappedData.body.map((row) => {
-            return row.reduce((acc: any, cell, index) => {
+            return row.reduce((acc: unknown, cell, index) => {
                 const header = mappedData.headers[index];
                 if(header !== null){
                     acc[header] = cell;

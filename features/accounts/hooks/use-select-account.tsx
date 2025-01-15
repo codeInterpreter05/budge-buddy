@@ -28,7 +28,7 @@ export const useSelectAccount = (): [() => JSX.Element, () => Promise<unknown>] 
 
     const [promise, setPromise] = useState<{
         resolve: (value: string | undefined) => void;
-        reject: (reason?: any) => void;
+        reject: (reason?: unknown) => void;
     } | null>(null); 
 
     const selectValue = useRef<string>();

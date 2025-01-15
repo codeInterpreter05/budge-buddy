@@ -4,7 +4,7 @@ import { convertAmountToMilliUnits, formatCurrency } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 
 
-export const CustomTooltip = ({active, payload}: any) => {
+export const CustomTooltip = ({active, payload}: unknown) => {
     if(!active) return null;
 
     const date = payload[0].payload.date;

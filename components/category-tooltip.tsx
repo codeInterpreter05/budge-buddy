@@ -2,7 +2,7 @@ import { convertAmountToMilliUnits, formatCurrency } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 
 
-export const CategoryTooltip = ({active, payload}: any) => {
+export const CategoryTooltip = ({active, payload}: unknown) => {
     if(!active) return null;
 
     const name = payload[0].payload.name;
