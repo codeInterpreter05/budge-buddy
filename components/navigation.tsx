@@ -68,7 +68,7 @@ export const Navigation = () => {
                         />
                         <nav className="flex flex-col gap-y-2 pt-6">
                             {
-                                routes.map(({ href, label, icon }, index) => (
+                                routes.map(({ href, label, icon }) => (
                                     <Button
                                         variant={href === pathname ? "secondary" : "ghost"}
                                         key={href}
