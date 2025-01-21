@@ -27,7 +27,7 @@ interface SelectedColumnsState {
 type Props = {
     data: string[][];
     onCancel: () => void;
-    onSubmit: (data: unknown) => void;    
+    onSubmit: (data: any) => void;    
 }
 
 export const ImportCard = ({
@@ -88,7 +88,7 @@ export const ImportCard = ({
         };
 
         const arrayOfData = mappedData.body.map((row) => {
-            return row.reduce((acc: unknown, cell, index) => {
+            return row.reduce((acc: any, cell, index) => {
                 const header = mappedData.headers[index];
                 if(header !== null){
                     acc[header] = cell;

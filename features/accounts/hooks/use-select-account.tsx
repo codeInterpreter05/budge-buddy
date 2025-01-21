@@ -13,7 +13,7 @@ import { useGetAccounts } from "../api/use-get-accounts";
 import { useCreateAccount } from "../api/use-create-account";
 import { Select } from "@/components/select";
 
-export const useSelectAccount = (): [() => JSX.Element, () => Promise<unknown>] => {
+export const useSelectAccount = (): [() => JSX.Element, () => Promise<any>] => {
     const accountQuery = useGetAccounts();
     const accountMutation = useCreateAccount();
 
@@ -28,7 +28,7 @@ export const useSelectAccount = (): [() => JSX.Element, () => Promise<unknown>] 
 
     const [promise, setPromise] = useState<{
         resolve: (value: string | undefined) => void;
-        reject: (reason?: unknown) => void;
+        reject: (reason?: any) => void;
     } | null>(null); 
 
     const selectValue = useRef<string>();
