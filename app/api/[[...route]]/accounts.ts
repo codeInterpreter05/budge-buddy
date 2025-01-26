@@ -151,7 +151,7 @@ const app = new Hono()
              .where(
                 and(
                     eq(accounts.id, id), 
-                    eq(accounts.userId, auth.userId)
+                    eq(accounts.userId, auth.userId as string)
                 )
              )
              .returning()
@@ -190,7 +190,7 @@ const app = new Hono()
              .where(
                 and(
                     eq(accounts.id, id), 
-                    eq(accounts.userId, auth.userId)
+                    eq(accounts.userId, auth.userId as string)
                 )
              )
              .returning({
